@@ -1,0 +1,20 @@
+# See https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#installing-roles-from-galaxy for more location options
+# You can also add collections - see the same URL
+# from galaxy
+# - name: hurricanehrndz.rustup
+# Personal roles
+# - src: git+ssh://git@github.com/bashfulrobot/general-desktop.git
+#   scm: git
+#   version: main
+# - src: git+ssh://git@github.com/bashfulrobot/zsh.git
+#   scm: git
+#   version: main
+# - src: git+ssh://git@github.com/bashfulrobot/docker.git
+#   scm: git
+#   version: main
+# - src: git+ssh://git@github.com/bashfulrobot/tailscale.git
+#   scm: git
+#   version: main
+
+collections:
+    - name: community.general
