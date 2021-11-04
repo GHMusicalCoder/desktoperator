@@ -1,0 +1,23 @@
+- name: install apt packages
+  become: yes
+  ansible.builtin.apt:
+    pkg: "{{ apt_pkgs }}"
+    state: present
+  when: apt_pkgs is defined
+
+# Note - purging happens at the top level of the
+# playbook as a "post task" step
+- name: remove apt packages
+  become: yes
+  ansible.builtin.apt:
+    pkg: "{{ remove_apt_pkgs }}"
+    state: absent
+  when: remove_apt_pkgs is defined
+
+# Some deb files are not available in a repository
+# This will download and install specific deb files
+- name: install remote .deb packages
+  become: yes
+  ansible.builtin.apt:
+    deb: "{{ item }}"
+  with_items: "{{ remote_deb_path }}"

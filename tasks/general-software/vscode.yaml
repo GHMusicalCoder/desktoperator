@@ -1,0 +1,33 @@
+- name: copy vscode theme
+  copy:
+    src: "files/home/tmp/dracula-pro.vsix"
+    dest: "/home/{{ lookup('env','USER') }}/tmp/dracula-pro.vsix"
+
+- name: set vscode apt gpg key
+  become: yes
+  ansible.builtin.apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+
+- name: add vscode repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] http://packages.microsoft.com/repos/code stable main"
+    state: present
+    filename: vscode
+    update_cache: true
+
+- name: install vscode
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - code-insiders
+    state: present
+
+- name: install vscode dracula theme locally
+  shell: |
+    code-insiders --install-extension ~/tmp/dracula-pro.vsix
+    touch "/home/{{ lookup('env','USER') }}/.config/ansible-automation/install-vscode-dracula-theme"
+  args:
+    creates: "/home/{{ lookup('env','USER') }}/.config/ansible-automation/install-vscode-dracula-theme"

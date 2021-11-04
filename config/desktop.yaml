@@ -1,0 +1,3 @@
+## Path to wallpaper file
+# Single quotes are important
+wallpaper_path: "'file:///home/dustin/Pictures/Wallpapers/Firewatch.jpg'"

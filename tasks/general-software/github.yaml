@@ -1,0 +1,135 @@
+- name: get latest release version of cod from github
+  github_release:
+    user: dim-an
+    repo: cod
+    action: latest_release
+  register: cod_release
+
+# Had to see the format returned.
+# JSON
+- debug: msg="{{ cod_release.tag }}"
+
+- name: download & extract cod tgz
+  become: yes
+  ansible.builtin.unarchive:
+    src: "https://github.com/dim-an/cod/releases/download/{{ cod_release.tag }}/cod-linux-amd64.tgz"
+    dest: /usr/local/bin
+    # Ditch the containing folder on extraction
+    # extra_opts:
+    #   - --strip-components=1
+    remote_src: yes
+  # when: cod_release.changed
+
+  # when: comicdl_release.changed
+- name: get latest release version of terraform from github
+  github_release:
+    user: hashicorp
+    repo: terraform
+    action: latest_release
+  register: terraform_release
+
+- name: clean up terraform version number
+  set_fact:
+    terraform_version: "{{ terraform_release.tag | regex_replace('^v', '') }}"
+
+- name: download & extract terraform tgz
+  become: yes
+  unarchive:
+    src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    dest: /usr/local/bin
+    remote_src: yes
+
+  # when: terraform_release.changed
+- name: get latest release version of gh cli from github
+  github_release:
+    user: cli
+    repo: cli
+    action: latest_release
+  register: gh_cli_release
+
+- name: get gh cli version number w/o v
+  set_fact:
+    gh_cli_version: "{{ gh_cli_release.tag | regex_replace('^v', '') }}"
+
+- name: install gh cli .deb package from github
+  become: yes
+  apt:
+    deb: https://github.com/cli/cli/releases/download/{{ gh_cli_release.tag }}/gh_{{ gh_cli_version }}_linux_amd64.deb
+
+  # when: gh_cli_release.changed
+- name: get latest release version of gotop from github
+  github_release:
+    user: xxxserxxx
+    repo: gotop
+    action: latest_release
+  register: gotop_release
+
+- name: download & extract gotop tgz #noqa 503
+  become: yes
+  unarchive:
+    src: "https://github.com/xxxserxxx/gotop/releases/download/{{ gotop_release.tag }}/gotop_{{ gotop_release.tag }}_linux_amd64.tgz"
+    dest: /usr/local/bin
+    # Ditch the containing folder on extraction
+    extra_opts: [--strip-components=1]
+    remote_src: yes
+
+  # when: gotop_release.changed
+- name: get latest release version of espanso from github
+  github_release:
+    user: federico-terzi
+    repo: espanso
+    action: latest_release
+  register: espanso_release
+
+- name: install espanso deb from github
+  become: yes
+  apt:
+    deb: "https://github.com/federico-terzi/espanso/releases/download/{{ espanso_release.tag }}/espanso-debian-amd64.deb"
+
+- name: get latest release version of bitwarden from github
+  github_release:
+    user: bitwarden
+    repo: desktop
+    action: latest_release
+  register: bitwarden_release
+
+- name: get bitwarden version number w/o v
+  set_fact:
+    bitwarden_version: "{{ bitwarden_release.tag | regex_replace('^v', '') }}"
+
+- name: install bitwarden .deb package from github
+  become: yes
+  apt:
+    deb: https://github.com/bitwarden/desktop/releases/download/{{ bitwarden_release.tag }}/Bitwarden-{{ bitwarden_version }}-amd64.deb
+
+- name: get latest release version of drawio from github
+  github_release:
+    user: jgraph
+    repo: drawio-desktop
+    action: latest_release
+  register: drawio_release
+
+- name: get drawio version number w/o v
+  set_fact:
+    drawio_version: "{{ drawio_release.tag | regex_replace('^v', '') }}"
+
+- name: install drawio .deb package from github
+  become: yes
+  apt:
+    deb: https://github.com/jgraph/drawio-desktop/releases/download/{{ drawio_release.tag }}/drawio-amd64-{{ drawio_version }}.deb
+
+- name: get latest release version of todoist cli from github
+  github_release:
+    user: sachaos
+    repo: todoist
+    action: latest_release
+  register: todoist_release
+
+- name: download todoist cli from github
+  become: yes
+  get_url:
+    url: "https://github.com/sachaos/todoist/releases/download/{{ todoist_release.tag }}/todoist_linux_amd64"
+    dest: "/usr/local/bin/todoist"
+    mode: "0755"
+    owner: root
+    group: root

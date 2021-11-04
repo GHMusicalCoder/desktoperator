@@ -1,0 +1,17 @@
+- name: set brave release apt gpg key
+  become: yes
+  ansible.builtin.apt_key:
+    url: "https://brave-browser-apt-release.s3.brave.com/brave-core.asc"
+    state: present
+
+- name: add brave repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"
+    update_cache: true
+
+- name: install brave
+  become: yes
+  ansible.builtin.apt:
+    name: brave-browser
+    update_cache: true

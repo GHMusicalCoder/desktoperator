@@ -1,0 +1,31 @@
+- name: set insynchq release apt gpg key
+  become: yes
+  ansible.builtin.apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: ACCAF35C
+
+- name: add insynchq stable apt repository for previous release
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb http://apt.insync.io/ubuntu {{ insync_ubuntu_version }} non-free contrib"
+    state: present
+    filename: insynchq
+    update_cache: true
+  when: insync_ubuntu_version is defined
+
+- name: add insynchq stable apt repository for the latest release
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb http://apt.insync.io/ubuntu {{ ansible_distribution_release }} non-free contrib"
+    update_cache: true
+  when: insync_ubuntu_version is undefined
+
+- name: install insynchq
+  become: yes
+  apt:
+    name: insync
+    update_cache: true
+- name: install insynchq nautilus
+  become: yes
+  apt:
+    name: insync-nautilus

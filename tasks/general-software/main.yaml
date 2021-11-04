@@ -1,0 +1,45 @@
+# Must come prior to apt
+- name: import tasks/general-software/lp-ppa.yaml
+  include: tasks/general-software/lp-ppa.yaml
+  tags: lp-ppa
+- name: import tasks/general-software/apt.yaml
+  include: tasks/general-software/apt.yaml
+  tags: apt
+- name: import tasks/general-software/flatpak.yaml
+  include: tasks/general-software/flatpak.yaml
+  tags: flatpak
+- name: import tasks/general-software/snaps.yaml
+  include: tasks/general-software/snaps.yaml
+  tags: snaps
+  # Must come prior to github
+- name: import tasks/general-software/pip.yaml
+  include: tasks/general-software/pip.yaml
+  tags: pip
+- name: import tasks/general-software/github.yaml
+  include: tasks/general-software/github.yaml
+  tags: github
+- name: import tasks/general-software/insynchq.yaml
+  include: tasks/general-software/insynchq.yaml
+  tags: insynchq
+- name: import tasks/general-software/msedge.yaml
+  include: tasks/general-software/msedge.yaml
+  tags: msedge
+- name: import tasks/general-software/nordvpn.yaml
+  include: tasks/general-software/nordvpn.yaml
+  tags: nordvpn
+- name: import tasks/general-software/protonup.yaml
+  include: tasks/general-software/protonup.yaml
+  tags: protonup
+  when: ansible_hostname == "i3"
+- name: tasks/general-software/sirikali.yaml
+  include: tasks/general-software/sirikali.yaml
+  tags: sirikali
+- name: import tasks/general-software/tailscale.yaml
+  include: tasks/general-software/tailscale.yaml
+  tags: tailscale
+- name: import tasks/general-software/vscode.yaml
+  include: tasks/general-software/vscode.yaml
+  tags: vscode
+- name: import tasks/general-software/element.yaml
+  include: tasks/general-software/element.yaml
+  tags: element

@@ -1,0 +1,124 @@
+# If you do not want or need to use certain features
+# in this playbook, simply comment out the appropriate
+# variable and it's example data.
+
+# Add custom Launchpad PPAs to your system
+lp_ppas:
+  # - ppa:peek-developers/stable
+  - ppa:appimagelauncher-team/stable
+
+# List of Apt packages to install
+# (a repo must be configured on the system for that package)
+apt_pkgs:
+  # peek dependency
+  - gstreamer1.0-plugins-ugly
+  - peek
+  - pass
+  - git
+  - ansible
+  - calibre
+  - bat
+  - piper
+  - ubuntu-restricted-extras
+  - ubuntu-restricted-addons
+  - ttf-mscorefonts-installer
+  - fd-find
+  - fonts-powerline
+  - tmux
+  # expanso dependency
+  - xclip
+  - ncdu
+  - openssh-server
+  - ubuntu-restricted-extras
+  - lftp
+  - gnome-firmware
+  - whois
+  - python3-pip
+  - flameshot
+  - curl
+  - wget
+  - gnupg-agent
+  - font-manager
+  - uncrustify
+  - gnome-disk-utility
+  - dlocate
+  - ttf-mscorefonts-installer
+  - fonts-emojione
+  - ppa-purge
+  - gocryptfs
+  - jq
+  - flatpak
+  - gnome-software-plugin-flatpak
+  - stacer
+  - v4l-utils
+  - nvme-cli
+  - celluloid
+  # cargo dependency
+  - libssl-dev
+  # cargo dependency
+  - pkg-config
+  # Custom PPA above
+  - appimagelauncher
+
+remote_deb_path:
+  - https://dl3.xmind.net/XMind-for-Linux-amd-64bit-11.0.1-202106220606.deb
+  - https://downloads.slack-edge.com/releases/linux/4.20.0/prod/x64/slack-desktop-4.20.0-amd64.deb
+
+# List of Apt packages to uninstall
+remove_apt_pkgs:
+  - firefox
+
+# Install Python PIP packages globally
+pip_packages:
+  - ansible-lint
+  - telegram-send
+  - gcp
+  - github3.py
+  - black
+  # Needed for some ansible modules
+  - psutil
+# Install flatpak packages
+# flatpak_pkgs:
+#   - sa.sy.bluerecorder
+# Install regular snap packages
+snap_pkgs:
+  - ncspot
+  - telegram-desktop
+  - spotify
+  - lxd
+  - icdiff
+  - review-tools
+  # move to appimg - standard-notes
+  - scrcpy
+  - beekeeper-studio
+  - cheat
+  - irccloud
+  - authy
+  - simplescreenrecorder
+  - imaginary-teleprompter
+  - nyrna
+  - bw
+
+# Install snap packages w/ classic containment
+classic_snap_pkgs:
+  - snapcraft
+  - snapdiff
+  # - code-insiders
+  - multipass
+  - espanso
+
+# Install snap packages from the edge channel
+edge_snap_pkgs:
+  - shfmt
+
+# Install snap packages from the edge channel w/ classic containment
+edge_classic_snap_pkgs:
+  - restic
+
+# Install snap packages from the extended edge channel
+extendededge_snap_pkgs:
+  - hugo
+
+# Install node snap
+# Set this to "false" if you do not want node installed
+node_install: true

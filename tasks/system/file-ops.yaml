@@ -1,0 +1,4 @@
+- name: copy vscode theme
+  copy:
+    src: "files/home/tmp/dracula-pro.vsix"
+    dest: "/home/{{ lookup('env','USER') }}/tmp/dracula-pro.vsix"

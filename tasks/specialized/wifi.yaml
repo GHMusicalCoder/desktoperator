@@ -1,0 +1,5 @@
+- name: placing default-wifi-powersave-on.conf
+  become: yes
+  copy:
+    src: files/etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+    dest: "/etc/NetworkManager/conf.d/default-wifi-powersave-on.conf"

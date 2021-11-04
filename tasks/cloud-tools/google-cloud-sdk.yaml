@@ -1,0 +1,31 @@
+- name: add google-cloud-sdk signing keys
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: add google-cloud-sdk main repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb https://packages.cloud.google.com/apt cloud-sdk main"
+    state: present
+    filename: google-cloud-sdk
+    update_cache: true
+
+- name: install google-cloud-sdk dependencies
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+    state: present
+
+- name: install google-cloud-sdk tools
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - google-cloud-sdk
+      - google-cloud-sdk-app-engine-go
+      - kubectl
+    state: present

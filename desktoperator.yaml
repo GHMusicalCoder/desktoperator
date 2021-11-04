@@ -1,0 +1,32 @@
+---
+- name: configuring desktop system
+  hosts: localhost
+  become: no
+  vars_files:
+    - config/software.yaml
+    - config/secrets.yaml
+    - config/release-pinning.yaml
+    - config/desktop.yaml
+  pre_tasks:
+    - name: update repositories
+      become: yes
+      apt: update_cache=yes
+      changed_when: false
+  tasks:
+    - include: tasks/main.yaml
+    # - include: "{{ item }}"
+    #   with_fileglob:
+    #     - tasks/active/*.yaml
+  # roles:
+  #   - role-name
+  post_tasks:
+    - name: autoremove and purge apt packages
+      become: yes
+      apt:
+        autoremove: yes
+        purge: yes
+    - name: updating the system
+      become: yes
+      apt:
+        update_cache: yes
+        upgrade: dist

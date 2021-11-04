@@ -1,0 +1,14 @@
+- name: add launchpad ppas
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: "{{ lp_ppas }}"
+
+- name: add canonical partners ppa
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner
+    update_cache: yes
+    state: present

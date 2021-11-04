@@ -1,0 +1,9 @@
+- name: import tasks/specialized/regolith.yaml
+  include: tasks/specialized/regolith.yaml
+  tags: regolith
+- name: import tasks/specialized/wifi.yaml
+  include: tasks/specialized/wifi.yaml
+  tags: wifi
+- name: import tasks/specialized/mxkeys.yaml
+  include: tasks/specialized/mxkeys.yaml
+  tags: mxkeys

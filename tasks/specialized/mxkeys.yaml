@@ -1,0 +1,13 @@
+- name: add solaar ppa
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: ppa:solaar-unifying/stable
+    state: present
+    filename: solaar
+    update_cache: true
+
+- name: install solaar apt package
+  become: yes
+  ansible.builtin.apt:
+    pkg: solaar
+    state: present

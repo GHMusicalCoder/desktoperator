@@ -1,0 +1,27 @@
+- name: remove regolith apt packages
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - i3xrocks-net-traffic
+    state: absent
+- name: install regolith apt packages
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - regolith-look-dracula
+      - alttab
+    state: present
+- name: set regolith look
+  shell: |
+    /usr/bin/regolith-look set dracula
+    touch "/home/{{ lookup('env','USER') }}/.config/ansible-automation/set-regolith-look"
+  args:
+    creates: "/home/{{ lookup('env','USER') }}/.config/ansible-automation/set-regolith-look"
+
+- name: placing alttab autostart
+  copy:
+    src: files/home/.config/autostart/alttab.desktop
+    dest: "/home/{{ lookup('env','USER') }}/.config/autostart/alttab.desktop"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: 0644

@@ -1,0 +1,9 @@
+- name: import tasks/cloud-tools/google-cloud-sdk.yaml
+  include: tasks/cloud-tools/google-cloud-sdk.yaml
+  tags: google-cloud-sdk
+- name: import tasks/cloud-tools/doppler.yaml
+  include: tasks/cloud-tools/doppler.yaml
+  tags: doppler
+- name: import tasks/cloud-tools/docker.yaml
+  include: tasks/cloud-tools/docker.yaml
+  tags: docker

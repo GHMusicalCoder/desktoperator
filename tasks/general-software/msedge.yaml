@@ -1,0 +1,19 @@
+- name: set edge release apt gpg key
+  become: yes
+  ansible.builtin.apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+
+- name: add microsoft edge repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] http://packages.microsoft.com/repos/edge/ stable main"
+    state: present
+    filename: microsoft-edge-beta
+    update_cache: true
+
+- name: install microsoft edge browser
+  become: yes
+  ansible.builtin.apt:
+    name: microsoft-edge-beta
+    update_cache: true

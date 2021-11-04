@@ -1,0 +1,42 @@
+- name: install snap packages
+  become: yes
+  snap:
+    name: "{{ snap_pkgs }}"
+  when: snap_pkgs is defined
+
+- name: install snap packages --classic
+  become: yes
+  snap:
+    classic: yes
+    name: "{{ classic_snap_pkgs }}"
+  when: classic_snap_pkgs is defined
+
+- name: install snap packages --channel=edge --classic
+  become: yes
+  snap:
+    name: "{{ edge_classic_snap_pkgs }}"
+    channel: edge
+    classic: yes
+  when: edge_classic_snap_pkgs is defined
+
+- name: install snap packages --channel=edge
+  become: yes
+  snap:
+    name: "{{ edge_snap_pkgs }}"
+    channel: edge
+  when: edge_snap_pkgs is defined
+
+- name: install snap packages  --channel=extended/edge
+  become: yes
+  snap:
+    name: "{{extendededge_snap_pkgs}}"
+    channel: extended/edge
+  when: extendededge_snap_pkgs is defined
+
+- name: Install Node Snap Package --channel=16/stable --classic
+  become: yes
+  snap:
+    name: node
+    channel: 16/stable
+    classic: yes
+  when: node_install is defined

@@ -1,0 +1,19 @@
+- name: add nord vpn apt signing Keys
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://repo.nordvpn.com/gpg/nordvpn_public.asc
+    state: present
+
+- name: add nord vpn ppa
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: deb https://repo.nordvpn.com/deb/nordvpn/debian stable main
+    state: present
+    filename: nordvpn
+    update_cache: true
+
+- name: install nord vpn
+  become: yes
+  ansible.builtin.apt:
+    name: nordvpn
+    update_cache: true

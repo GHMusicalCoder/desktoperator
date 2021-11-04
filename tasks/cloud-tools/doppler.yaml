@@ -1,0 +1,30 @@
+- name: add doppler's signing keys
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key
+    state: present
+
+- name: add doppler's stable apt repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb https://packages.doppler.com/public/cli/deb/debian any-version main"
+    state: present
+    filename: doppler
+    update_cache: true
+
+- name: install doppler dependencies
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+
+- name: install doppler
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - doppler
+    state: present

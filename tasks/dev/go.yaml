@@ -1,0 +1,31 @@
+---
+- name: include vars from go.yaml
+  include_vars: config/go.yaml
+- name: create golang package directory
+  become: yes
+  file:
+    path: "{{golang_package_cache}}"
+    state: directory
+- name: download golang
+  become: yes
+  get_url:
+    url: "https://dl.google.com/go/go{{golang_version}}.linux-amd64.tar.gz"
+    dest: "{{golang_package_cache}}/go{{golang_version}}.linux-amd64.tar.gz"
+    checksum: "{{golang_checksum}}"
+- name: install golang
+  become: yes
+  unarchive:
+    src: "{{golang_package_cache}}/go{{golang_version}}.linux-amd64.tar.gz"
+    dest: /usr/local
+    remote_src: true
+    creates: /usr/local/bin/go
+- name: add goroot to global profile
+  become: yes
+  lineinfile:
+    path: /etc/profile
+    line: export goroot=/usr/local/go
+- name: add go to path in global profile
+  become: yes
+  lineinfile:
+    path: /etc/profile
+    line: export path=$path:/usr/local/bin/go

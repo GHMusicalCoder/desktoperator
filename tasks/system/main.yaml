@@ -1,0 +1,14 @@
+- name: import tasks/system/sudo.yaml
+  include: tasks/system/sudo.yaml
+  tags: sudo
+- name: import tasks/system/settings.yaml
+  include: tasks/system/settings.yaml
+  tags: settings
+- name: import tasks/system/symlink.yaml
+  include: tasks/system/symlink.yaml
+  tags: symlink
+- name: import tasks/system/zsh.yaml
+  include: tasks/system/zsh.yaml
+  tags: zsh
+# - name: import tasks/system/file-ops.yaml
+#   include: tasks/system/file-ops.yaml

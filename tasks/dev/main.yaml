@@ -1,0 +1,6 @@
+- name: import tasks/dev/git.yaml
+  include: tasks/dev/git.yaml
+  tags: git
+- name: import tasks/dev/go.yaml
+  include: tasks/dev/go.yaml
+  tags: go

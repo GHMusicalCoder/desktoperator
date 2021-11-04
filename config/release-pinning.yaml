@@ -1,0 +1,8 @@
+# Defined for use when you update to the latest version of
+# Ubuntu, and a software vendor has not yet updated thier PPA
+# COmment this out when the PPAs have been updated.
+
+docker_ubuntu_version: hirsute
+insync_ubuntu_version: hirsute
+tailscale_ubuntu_version: focal
+sirikali_ubuntu_version: xUbuntu_21.04

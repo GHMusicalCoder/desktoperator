@@ -1,0 +1,19 @@
+- name: add sirikali apt signing keys
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://download.opensuse.org/repositories/home:obs_mhogomchungu/{{ sirikali_ubuntu_version }}/Release.key
+    state: present
+
+- name: add sirikali ppa
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: deb https://download.opensuse.org/repositories/home:/obs_mhogomchungu/{{ sirikali_ubuntu_version }}/ /
+    state: present
+    filename: sirikali
+    update_cache: true
+
+- name: install sirikali
+  become: yes
+  ansible.builtin.apt:
+    name: sirikali
+    update_cache: true

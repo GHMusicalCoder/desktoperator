@@ -1,0 +1,14 @@
+- name: import tasks/general-software/main.yaml
+  include: tasks/general-software/main.yaml
+  tags: general-software
+- name: import tasks/dev/main.yaml
+  include: tasks/dev/main.yaml
+  tags: dev
+- name: import tasks/cloud-tools/main.yaml
+  include: tasks/cloud-tools/main.yaml
+  tags: cloud-tools
+- name: import tasks/system/main.yaml
+  include: tasks/system/main.yaml
+  tags: system
+- name: import tasks/specialized/main.yaml
+  include: tasks/specialized/main.yaml
