@@ -1,0 +1,192 @@
+- name: installing zsh shell
+  ansible.builtin.apt:
+    pkg:
+      - git
+      - zsh
+      - fonts-powerline
+      - powerline
+    state: present
+  become: yes
+  register: install_zsh
+
+- name: change current user shell
+  user:
+    name: "{{ lookup('env','USER') }}"
+    shell: /usr/bin/zsh
+  become: yes
+
+- name: clone oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh"
+    update: no
+  register: omz_clone
+
+- name: clone zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    update: yes
+
+- name: clone zsh-history-substring-search
+  git:
+    repo: https://github.com/zsh-users/zsh-history-substring-search.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
+    update: yes
+
+- name: clone zsh-syntax-highlighting
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    update: yes
+
+- name: clone powerlevel10k theme
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    update: yes
+
+- name: clone zsh-z
+  git:
+    repo: https://github.com/agkozak/zsh-z.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-z"
+    update: yes
+
+# - name: clone dotenv
+#   git:
+#         repo: https://github.com/agkozak/zsh-z.git
+#         dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-z"
+#         update: yes
+
+- name: clone dotenv
+  git:
+    repo: https://github.com/agkozak/zsh-z.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-z"
+    update: yes
+
+- name: check if .zshrc exists
+  when: install_zsh is success
+  stat:
+    path: "/home/{{ lookup('env','USER') }}/.zshrc"
+  register: zshrc
+
+- name: back up existing .zshrc file if it exists
+  when: zshrc.stat.exists
+  copy:
+    src: "/home/{{ lookup('env','USER') }}/.zshrc"
+    dest: "/home/{{ lookup('env','USER') }}/.zshrc-orig"
+
+- name: creating new ~/.zshrc
+  copy:
+    src: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/templates/zshrc.zsh-template"
+    dest: "/home/{{ lookup('env','USER') }}/.zshrc"
+  when: omz_clone is success
+  register: created_zshrc
+
+- name: enable 10k theme in zsh
+  lineinfile:
+    path: "/home/{{ lookup('env','USER') }}/.zshrc"
+    regexp: "^ZSH_THEME="
+    line: "ZSH_THEME='powerlevel10k/powerlevel10k'"
+
+# - name: Placing Starship config for prompt
+#   copy:
+#     src: files/.config/starship.toml
+#     dest: "/home/{{ lookup('env','USER') }}/.config/starship.toml"
+#     owner: "{{ lookup('env','USER') }}"
+#     group: "{{ lookup('env','USER') }}"
+
+- name: placing general.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/general.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/general.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing go.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/go.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/go.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing plugins.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/plugins.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing aliases.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/aliases.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/aliases.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing functions.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/functions.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/functions.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing path.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/path.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/path.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing util-functions.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/util-functions.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/util-functions.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing prompt.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/prompt.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/prompt.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing .p10k.zsh cfg
+  copy:
+    src: files/home/.p10k.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.p10k.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing cheatsheets.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/cheatsheets.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/cheatsheets.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing aws-cli.zsh cfg
+  copy:
+    src: files/home/.oh-my-zsh/custom/aws-cli.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/aws-cli.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: setup folders for shell bookmarks
+  file:
+    path: "/home/{{ lookup('env','USER') }}/.bookmarks"
+    state: directory
+    mode: "0700"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: create shell bookmark for devel
+  become: yes
+  ansible.builtin.file:
+    src: "/home/{{ lookup('env','USER') }}/Documents/devel"
+    dest: "/home/{{ lookup('env','USER') }}/.bookmarks/@devel"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    state: link
+    mode: "0700"
