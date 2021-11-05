@@ -30,3 +30,22 @@
     owner: "root"
     group: "root"
     mode: 0644
+
+- name: placing kitty.conf cfg
+  copy:
+    src: files/home/.config/kitty/kitty.conf
+    dest: "/home/{{ lookup('env','USER') }}/.config/kitty/kitty.conf"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+- name: placing kitty diff.conf cfg
+  copy:
+    src: files/home/.config/kitty/diff.conf
+    dest: "/home/{{ lookup('env','USER') }}/.config/kitty/diff.conf"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+- name: placing kitty dracula.conf cfg
+  copy:
+    src: files/home/.config/kitty/dracula.conf
+    dest: "/home/{{ lookup('env','USER') }}/.config/kitty/dracula.conf"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
