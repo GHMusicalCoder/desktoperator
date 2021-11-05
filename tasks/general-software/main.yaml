@@ -15,8 +15,8 @@
 - name: import tasks/general-software/pip.yaml
   include: tasks/general-software/pip.yaml
   tags: pip
-- name: import tasks/general-software/github.yaml
-  include: tasks/general-software/github.yaml
+- name: import tasks/general-software/github/main.yaml
+  include: tasks/general-software/github/main.yaml
   tags: github
 - name: import tasks/general-software/insynchq.yaml
   include: tasks/general-software/insynchq.yaml

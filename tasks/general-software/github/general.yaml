@@ -21,40 +21,6 @@
   # when: cod_release.changed
 
   # when: comicdl_release.changed
-- name: get latest release version of terraform from github
-  github_release:
-    user: hashicorp
-    repo: terraform
-    action: latest_release
-  register: terraform_release
-
-- name: clean up terraform version number
-  set_fact:
-    terraform_version: "{{ terraform_release.tag | regex_replace('^v', '') }}"
-
-- name: download & extract terraform tgz
-  become: yes
-  unarchive:
-    src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: yes
-
-  # when: terraform_release.changed
-- name: get latest release version of gh cli from github
-  github_release:
-    user: cli
-    repo: cli
-    action: latest_release
-  register: gh_cli_release
-
-- name: get gh cli version number w/o v
-  set_fact:
-    gh_cli_version: "{{ gh_cli_release.tag | regex_replace('^v', '') }}"
-
-- name: install gh cli .deb package from github
-  become: yes
-  apt:
-    deb: https://github.com/cli/cli/releases/download/{{ gh_cli_release.tag }}/gh_{{ gh_cli_version }}_linux_amd64.deb
 
   # when: gh_cli_release.changed
 - name: get latest release version of gotop from github
