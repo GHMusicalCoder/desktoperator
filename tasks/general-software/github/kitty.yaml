@@ -1,0 +1,32 @@
+- name: setup kitty folder if they do not exist
+  become: yes
+  file:
+    path: "/usr/local/kitty"
+    state: directory
+
+- name: get latest release version of kitty from github
+  github_release:
+    user: kovidgoyal
+    repo: kitty
+    action: latest_release
+  register: kitty_release
+
+- name: get kitty version number w/o v
+  set_fact:
+    kitty_version: "{{ kitty_release.tag | regex_replace('^v', '') }}"
+
+- name: download & extract kitty txz #noqa 503
+  become: yes
+  unarchive:
+    src: "https://github.com/kovidgoyal/kitty/releases/download/{{ kitty_release.tag }}/kitty-{{ kitty_version }}-x86_64.txz"
+    dest: /usr/local/kitty
+    remote_src: yes
+
+- name: placing kitty desktop file
+  become: yes
+  copy:
+    src: files/usr/share/applications/kitty.desktop
+    dest: "/usr/share/applications/kitty.desktop"
+    owner: "root"
+    group: "root"
+    mode: 0644

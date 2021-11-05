@@ -14,3 +14,6 @@ export PATH=$HOME/.cargo/bin:$PATH
 
 # Add Rust/Cargo
 # source $HOME/.cargo/env
+
+# Add kitty bin
+export PATH=/usr/local/kitty/bin:$PATH

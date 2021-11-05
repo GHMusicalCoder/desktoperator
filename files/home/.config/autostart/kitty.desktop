@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/local/kitty/bin/kitty
+Hidden=false
+NoDisplay=false
+Name[en_CA]=kitty
+Name=kitty
+Comment[en_CA]=
+Comment=
