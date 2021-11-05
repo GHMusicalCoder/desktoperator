@@ -59,6 +59,8 @@ apt_pkgs:
   - pkg-config
   # Custom PPA above
   - appimagelauncher
+  - rclone
+  - rclone-browser
 
 remote_deb_path:
   - https://dl3.xmind.net/XMind-for-Linux-amd-64bit-11.0.1-202106220606.deb
