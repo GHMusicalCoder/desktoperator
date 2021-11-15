@@ -35,4 +35,4 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 eval "$(bw completion --shell zsh); compdef _bw bw;"
 
 # dircolors support for use in gnome terminal dracula install
-eval $(dircolors /path/to/dircolorsdb)
+eval $(dircolors ~/.dir_colors/dircolors)
