@@ -2,5 +2,5 @@
   include: tasks/general-software/github/general.yaml
 - name: import tasks/general-software/github/dev.yaml
   include: tasks/general-software/github/dev.yaml
-- name: tasks/general-software/github/kitty.yaml
-  include: tasks/general-software/github/kitty.yaml
+# - name: tasks/general-software/github/kitty.yaml
+#   include: tasks/general-software/github/kitty.yaml
