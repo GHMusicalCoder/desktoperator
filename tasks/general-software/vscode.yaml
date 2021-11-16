@@ -49,3 +49,11 @@
   get_url:
     url: https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/code-nautilus.py
     dest: "/home/{{ lookup('env','USER') }}/.local/share/nautilus-python/extensions/code-nautilus.py"
+- name: create code-insiders to code symbolic link
+  become: yes
+  ansible.builtin.file:
+    src: /usr/bin/code-insiders
+    dest: /usr/bin/code
+    owner: root
+    group: root
+    state: link
