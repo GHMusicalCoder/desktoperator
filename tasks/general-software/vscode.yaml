@@ -31,3 +31,21 @@
     touch "/home/{{ lookup('env','USER') }}/.config/ansible-automation/install-vscode-dracula-theme"
   args:
     creates: "/home/{{ lookup('env','USER') }}/.config/ansible-automation/install-vscode-dracula-theme"
+
+- name: install vscode nautilus integration dependencies
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - python3-nautilus
+    state: present
+- name: create "~/.local/share/nautilus-python/extensions/" folder
+  file:
+    path: "/home/{{ lookup('env','USER') }}/.local/share/nautilus-python/extensions/"
+    state: directory
+    mode: "0700"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+- name: install the latest code-nautilus.py
+  get_url:
+    url: https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/code-nautilus.py
+    dest: "/home/{{ lookup('env','USER') }}/.local/share/nautilus-python/extensions/code-nautilus.py"
