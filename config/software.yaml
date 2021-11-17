@@ -107,7 +107,6 @@ classic_snap_pkgs:
   - snapdiff
   # - code-insiders
   - multipass
-  - espanso
 
 # Install snap packages from the edge channel
 edge_snap_pkgs:
