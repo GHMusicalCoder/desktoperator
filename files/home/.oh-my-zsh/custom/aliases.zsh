@@ -55,3 +55,8 @@ if [ -d "$HOME/.bookmarks" ]; then
     export CDPATH=".:$HOME/.bookmarks:/"
     alias gt="cd -P"
 fi
+
+alias vi="~/Applications/nvim.appimage"
+alias vim="~/Applications/nvim.appimage"
+alias nvim="~/Applications/nvim.appimage"
+alias neovim="~/Applications/nvim.appimage"
