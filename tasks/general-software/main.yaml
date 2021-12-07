@@ -43,3 +43,6 @@
 - name: import tasks/general-software/element.yaml
   include: tasks/general-software/element.yaml
   tags: element
+- name: import tasks/general-software/cawbird.yaml
+  include: tasks/general-software/cawbird.yaml
+  tags: cawbird
