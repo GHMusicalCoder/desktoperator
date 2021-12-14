@@ -21,9 +21,9 @@
 - name: import tasks/general-software/insynchq.yaml
   include: tasks/general-software/insynchq.yaml
   tags: insynchq
-- name: import tasks/general-software/msedge.yaml
-  include: tasks/general-software/msedge.yaml
-  tags: msedge
+- name: import tasks/general-software/brave.yaml
+  include: tasks/general-software/brave.yaml
+  tags: brave
 - name: import tasks/general-software/nordvpn.yaml
   include: tasks/general-software/nordvpn.yaml
   tags: nordvpn
