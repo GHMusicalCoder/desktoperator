@@ -118,6 +118,7 @@ edge_snap_pkgs:
 # Install snap packages from the edge channel w/ classic containment
 edge_classic_snap_pkgs:
   - restic
+  - espanso
 
 # Install snap packages from the extended edge channel
 extendededge_snap_pkgs:

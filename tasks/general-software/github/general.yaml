@@ -40,17 +40,17 @@
     remote_src: yes
 
   # when: gotop_release.changed
-- name: get latest release version of espanso from github
-  github_release:
-    user: federico-terzi
-    repo: espanso
-    action: latest_release
-  register: espanso_release
+# - name: get latest release version of espanso from github
+#   github_release:
+#     user: federico-terzi
+#     repo: espanso
+#     action: latest_release
+#   register: espanso_release
 
-- name: install espanso deb from github
-  become: yes
-  apt:
-    deb: "https://github.com/federico-terzi/espanso/releases/download/{{ espanso_release.tag }}/espanso-debian-amd64.deb"
+# - name: install espanso deb from github
+#   become: yes
+#   apt:
+#     deb: "https://github.com/federico-terzi/espanso/releases/download/{{ espanso_release.tag }}/espanso-debian-amd64.deb"
 
 - name: get latest release version of bitwarden from github
   github_release:
