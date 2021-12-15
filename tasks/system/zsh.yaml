@@ -53,12 +53,6 @@
     dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-z"
     update: yes
 
-- name: clone zsh-z
-  git:
-    repo: https://github.com/agkozak/zsh-z.git
-    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-z"
-    update: yes
-
 - name: clone zsh-direnv
   git:
     repo: https://github.com/ptavares/zsh-direnv.git
