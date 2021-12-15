@@ -59,6 +59,12 @@
     dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-z"
     update: yes
 
+- name: clone zsh-direnv
+  git:
+    repo: https://github.com/ptavares/zsh-direnv.git
+    dest: "/home/{{ lookup('env','USER') }}/.oh-my-zsh/custom/plugins/zsh-direnv"
+    update: yes
+
 - name: check if .zshrc exists
   when: install_zsh is success
   stat:

@@ -40,6 +40,5 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
     z
-    dotenv
-    direnv
+    zsh-direnv
 )
