@@ -41,4 +41,5 @@ plugins=(
     zsh-autosuggestions
     z
     dotenv
+    direnv
 )

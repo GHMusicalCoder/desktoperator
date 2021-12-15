@@ -5,6 +5,7 @@
       - zsh
       - fonts-powerline
       - powerline
+      - direnv
     state: present
   become: yes
   register: install_zsh
