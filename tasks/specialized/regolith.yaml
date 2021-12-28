@@ -9,11 +9,12 @@
   ansible.builtin.apt:
     pkg:
       - regolith-look-dracula
+      - regolith-look-gruvbox
       - alttab
     state: present
 - name: set regolith look
   shell: |
-    /usr/bin/regolith-look set dracula
+    /usr/bin/regolith-look set gruvbox
     touch "/home/{{ lookup('env','USER') }}/.config/ansible-automation/set-regolith-look"
   args:
     creates: "/home/{{ lookup('env','USER') }}/.config/ansible-automation/set-regolith-look"
