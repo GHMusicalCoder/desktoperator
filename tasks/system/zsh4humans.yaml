@@ -10,6 +10,16 @@
   become: yes
   register: install_zsh
 
+- name: setup zsh folders if they do not exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0700"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+  with_items:
+    - "/home/{{ lookup('env','USER') }}/.config/zsh"
+
 - name: change current user shell
   user:
     name: "{{ lookup('env','USER') }}"
@@ -30,17 +40,101 @@
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
 
-- name: placing .zshutil
-  copy:
-    src: files/home/.zshutil
-    dest: "/home/{{ lookup('env','USER') }}/.zshutil"
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
-
 - name: placing .p10k.zsh cfg
   copy:
     src: files/home/.p10k.zsh
     dest: "/home/{{ lookup('env','USER') }}/.p10k.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh echoHeader function file
+  copy:
+    src: files/home/.config/zsh/echoHeader
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/echoHeader"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh echoSection function file
+  copy:
+    src: files/home/.config/zsh/echoSection
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/echoSection"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh checkInstalledApt function file
+  copy:
+    src: files/home/.config/zsh/checkInstalledApt
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/checkInstalledApt"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh runAptUpdateIfNeeded function file
+  copy:
+    src: files/home/.config/zsh/runAptUpdateIfNeeded
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/runAptUpdateIfNeeded"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh ask function file
+  copy:
+    src: files/home/.config/zsh/ask
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/ask"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh myint function file
+  copy:
+    src: files/home/.config/zsh/myint
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/myint"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh catclip function file
+  copy:
+    src: files/home/.config/zsh/catclip
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/catclip"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh myip function file
+  copy:
+    src: files/home/.config/zsh/myip
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/myip"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh do-update function file
+  copy:
+    src: files/home/.config/zsh/do-update
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/do-update"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh gh-rate-limit-reset-time function file
+  copy:
+    src: files/home/.config/zsh/gh-rate-limit-reset-time
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/gh-rate-limit-reset-time"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh gh-rate-limit function file
+  copy:
+    src: files/home/.config/zsh/gh-rate-limit
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/gh-rate-limit"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh bwcopy function file
+  copy:
+    src: files/home/.config/zsh/bwcopy
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/bwcopy"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing zsh prepend-sudo function file
+  copy:
+    src: files/home/.config/zsh/prepend-sudo
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/prepend-sudo"
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
 

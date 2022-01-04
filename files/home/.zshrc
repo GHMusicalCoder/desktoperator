@@ -46,7 +46,7 @@ zstyle ':z4h:ssh:*'                   enable 'yes'
 
 # Send these files over to the remote host when connecting over SSH to the
 # enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh' '~/.zshutil'
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 
 #####=== GIT Clone
 
@@ -79,6 +79,16 @@ PATH=$PATH:/usr/local/go/bin
 export PATH
 
 #####=== Export environment variables.
+
+# Colours
+export RED=$(tput setaf 1)
+export GREEN=$(tput setaf 2)
+export YELLOW=$(tput setaf 3)
+export NC=$(tput sgr0)
+
+export ONLINE="${GREEN}online$NC"
+export OFFLINE="${RED}offline$NC"
+
 export GPG_TTY=$TTY
 # Support additional terminal
 export TERM=xterm-256color
@@ -97,7 +107,6 @@ export GO111MODULE=on
 
 #####=== Source additional local files if they exist.
 z4h source ~/.env.zsh
-z4h source ~/.zshutil
 # Enable COD binary
 z4h source <(cod init $$ zsh)
 
@@ -121,84 +130,13 @@ z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 #####=== Autoload functions.
-autoload -Uz zmv
+fpath=( ~/.config/zsh "${fpath[@]}" )
+autoload -Uz $fpath[1]/*(.:t)
 
 #####=== Define functions and completions.
 
-# add shell completion for bw cli
-eval "$(bw completion --shell zsh); compdef _bw bw;"
-
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
-
-function myint() {
-    ip -4 a | grep -v valid_lft | awk '{print $2}'
-}
-
-function catclip() {
-    batcat -p $1 | xclip -i -selection clipboard
-}
-
-function myip() {
-    hostname -I | awk '{print $1}'
-}
-
-function myip() {
-    curl -s https://myip.biturl.top/ | cut -d "%" -f1
-}
-
-function do-update() {
-    runAptUpdateIfNeeded
-    sleep 1
-    echoSection "Updating Distro"
-    sudo apt dist-upgrade -y
-    sleep 1
-    echoSection "Performing Autoremove"
-    sudo apt clean -y
-    sudo apt autoremove -y
-    sleep 1
-    echoSection "Adding Missing Deps"
-    sudo apt install -f -y
-    sleep 1
-    echoHeader "Completed System Update"
-}
-
-function gh-rate-limit-reset-time() {
-    # Are the apps installed?
-    checkInstalledApt jq
-    checkInstalledApt curl
-
-    date -d @$(curl -X GET https://api.github.com/rate_limit | jq .rate.reset)
-}
-
-function gh-rate-limit() {
-    # Are the apps installed?
-    checkInstalledApt curl
-    curl -X GET https://api.github.com/rate_limit
-}
-
-bwcopy() {
-    checkInstalledApt fzf
-    checkInstalledApt jq
-    checkInstalledApt xclip
-
-    if hash bw 2>/dev/null; then
-        bw get item "$(bw list items | jq '.[] | "\(.name) | username: \(.login.username) | id: \(.id)" ' | fzf-tmux | awk '{print $(NF -0)}' | sed 's/\"//g')" | jq '.login.password' | sed 's/\"//g' | xclip -sel clip
-    fi
-}
-
-# add sudo before command with esc, s
-function prepend-sudo() {
-    [[ -z $BUFFER ]] && zle up-history
-    if [[ $BUFFER == sudo\ * ]]; then
-        LBUFFER="${LBUFFER#sudo }"
-    else
-        LBUFFER="sudo $LBUFFER"
-    fi
-}
-zle -N prepend-sudo
-# shortcut keys: [Esc] [s]
-bindkey "\es" prepend-sudo
 
 #####=== Define named directories: ~w <=> Windows home directory on WSL.
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home

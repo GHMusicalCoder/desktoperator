@@ -1,0 +1,3 @@
+function catclip() {
+    batcat -p $1 | xclip -i -selection clipboard
+}
