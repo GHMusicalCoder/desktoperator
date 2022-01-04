@@ -1,0 +1,56 @@
+- name: installing zsh shell
+  ansible.builtin.apt:
+    pkg:
+      - git
+      - zsh
+      - fonts-powerline
+      - powerline
+      - direnv
+    state: present
+  become: yes
+  register: install_zsh
+
+- name: change current user shell
+  user:
+    name: "{{ lookup('env','USER') }}"
+    shell: /usr/bin/zsh
+  become: yes
+
+- name: placing .zshrc
+  copy:
+    src: files/home/.zshrc
+    dest: "/home/{{ lookup('env','USER') }}/.zshrc"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing .zshenv
+  copy:
+    src: files/home/.zshenv
+    dest: "/home/{{ lookup('env','USER') }}/.zshenv"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: placing .p10k.zsh cfg
+  copy:
+    src: files/home/.p10k.zsh
+    dest: "/home/{{ lookup('env','USER') }}/.p10k.zsh"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: setup folders for shell bookmarks
+  file:
+    path: "/home/{{ lookup('env','USER') }}/.bookmarks"
+    state: directory
+    mode: "0700"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
+- name: create shell bookmark for devel
+  become: yes
+  ansible.builtin.file:
+    src: "/home/{{ lookup('env','USER') }}/Documents/devel"
+    dest: "/home/{{ lookup('env','USER') }}/.bookmarks/@devel"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    state: link
+    mode: "0700"

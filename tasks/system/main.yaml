@@ -7,8 +7,8 @@
 - name: import tasks/system/symlink.yaml
   include: tasks/system/symlink.yaml
   tags: symlink
-- name: import tasks/system/zsh.yaml
-  include: tasks/system/zsh.yaml
+- name: import tasks/system/zsh4humans.yaml
+  include: tasks/system/zsh4humans.yaml
   tags: zsh
 # - name: import tasks/system/file-ops.yaml
 #   include: tasks/system/file-ops.yaml
