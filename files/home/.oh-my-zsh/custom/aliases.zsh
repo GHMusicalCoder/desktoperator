@@ -25,7 +25,7 @@ alias vpn-cities="/usr/bin/nordvpn cities"
 alias vpn-settings="/usr/bin/nordvpn settings"
 alias vpn-status="/usr/bin/nordvpn status"
 alias vpn-account="/usr/bin/nordvpn account"
-alias vpn-help="/usr/bin/firefox https://support.nordvpn.com/Connectivity/Linux/1325531132/Installing-and-using-NordVPN-on-Debian-Ubuntu-and-Linux-Mint.htm"
+alias vpn-help="/usr/bin/brave-browser https://support.nordvpn.com/Connectivity/Linux/1325531132/Installing-and-using-NordVPN-on-Debian-Ubuntu-and-Linux-Mint.htm"
 
 alias cat="batcat"
 alias cfg-update="$HOME/tmp/bashfulrobot-ansible/deploy.sh"

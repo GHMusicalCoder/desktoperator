@@ -6,7 +6,9 @@
 function options() {
     PLUGIN_PATH="$HOME/.oh-my-zsh/plugins/"
     for plugin in $plugins; do
-        echo "\n\nPlugin: $plugin"; grep -r "^function \w*" $PLUGIN_PATH$plugin | awk '{print $2}' | sed 's/()//'| tr '\n' ', '; grep -r "^alias" $PLUGIN_PATH$plugin | awk '{print $2}' | sed 's/=.*//' |  tr '\n' ', '
+        echo "\n\nPlugin: $plugin"
+        grep -r "^function \w*" $PLUGIN_PATH$plugin | awk '{print $2}' | sed 's/()//' | tr '\n' ', '
+        grep -r "^alias" $PLUGIN_PATH$plugin | awk '{print $2}' | sed 's/=.*//' | tr '\n' ', '
     done
 }
 
@@ -19,7 +21,7 @@ function myint() {
 }
 
 function catclip() {
-    cat $1 | xclip -i -selection clipboard
+    batcat -p $1 | xclip -i -selection clipboard
 }
 
 function myip() {
@@ -174,15 +176,35 @@ rustscan() {
 
 # add sudo before command with esc, s
 function prepend-sudo() {
-  [[ -z $BUFFER ]] && zle up-history
-  if [[ $BUFFER == sudo\ * ]]; then
-    LBUFFER="${LBUFFER#sudo }"
-  else
-    LBUFFER="sudo $LBUFFER"
-  fi
+    [[ -z $BUFFER ]] && zle up-history
+    if [[ $BUFFER == sudo\ * ]]; then
+        LBUFFER="${LBUFFER#sudo }"
+    else
+        LBUFFER="sudo $LBUFFER"
+    fi
 }
 zle -N prepend-sudo
 # shortcut keys: [Esc] [s]
 bindkey "\es" prepend-sudo
 
-transfer(){ if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
+transfer() {
+    if [ $# -eq 0 ]; then
+        echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>" >&2
+        return 1
+    fi
+    if tty -s; then
+        file="$1"
+        file_name=$(basename "$file")
+        if [ ! -e "$file" ]; then
+            echo "$file: No such file or directory" >&2
+            return 1
+        fi
+        if [ -d "$file" ]; then
+            file_name="$file_name.zip" ,
+            (cd "$file" && zip -r -q - .) | curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null,
+        else cat "$file" | curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null; fi
+    else
+        file_name=$1
+        curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name" | tee /dev/null
+    fi
+}
