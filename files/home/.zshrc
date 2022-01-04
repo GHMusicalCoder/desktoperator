@@ -13,7 +13,7 @@ zstyle ':z4h:' auto-update      'ask'
 zstyle ':z4h:' auto-update-days '15'
 
 # Move prompt to the bottom when zsh starts and on Ctrl+L.
-zstyle ':z4h:' prompt-at-bottom 'yes'
+zstyle ':z4h:' prompt-at-bottom 'no'
 
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard  'pc'
