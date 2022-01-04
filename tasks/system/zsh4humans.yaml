@@ -30,6 +30,13 @@
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
 
+- name: placing .zshutil
+  copy:
+    src: files/home/.zshutil
+    dest: "/home/{{ lookup('env','USER') }}/.zshutil"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
 - name: placing .p10k.zsh cfg
   copy:
     src: files/home/.p10k.zsh
