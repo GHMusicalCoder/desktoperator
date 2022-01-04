@@ -1,5 +1,11 @@
 {
     "conventionalCommits.scopes": [
         "configuration"
+    ],
+    "cSpell.words": [
+        "devel",
+        "direnv",
+        "powerline",
+        "zshutil"
     ]
 }
