@@ -56,6 +56,7 @@ zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 # up-to-date. Cloned files can be used after `z4h init`. This is just an
 # example. If you don't plan to use Oh My Zsh, delete this line.
 # z4h install ohmyzsh/ohmyzsh || return
+z4h install djui/alias-tips || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable until Zsh
@@ -109,6 +110,10 @@ export GO111MODULE=on
 z4h source ~/.env.zsh
 # Enable COD binary
 z4h source <(cod init $$ zsh)
+
+# Enable alias tips plug in
+# cloned via previous install command
+z4h source $Z4H/djui/alias-tips/alias-tips.plugin.zsh
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
