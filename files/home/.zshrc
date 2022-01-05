@@ -137,8 +137,10 @@ z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 #####=== Autoload functions.
-fpath=( ~/.config/zsh "${fpath[@]}" )
-autoload -Uz $fpath[1]/*(.:t)
+if [[ -d "~/.config/zsh" ]]; then
+    fpath=( ~/.config/zsh "${fpath[@]}" )
+    autoload -Uz $fpath[1]/*(.:t)
+fi
 
 #####=== Define functions and completions.
 
@@ -173,7 +175,7 @@ alias vpn-status="/usr/bin/nordvpn status"
 alias vpn-account="/usr/bin/nordvpn account"
 alias vpn-help="/usr/bin/brave-browser https://support.nordvpn.com/Connectivity/Linux/1325531132/Installing-and-using-NordVPN-on-Debian-Ubuntu-and-Linux-Mint.htm"
 
-if [[ -f "/usr/bin/batcat" ]]; then
+if [[ ! -f "/usr/bin/batcat" ]]; then
     sudo apt install bat -y
 fi
 alias cat="batcat"
