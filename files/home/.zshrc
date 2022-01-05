@@ -109,7 +109,9 @@ export GO111MODULE=on
 #####=== Source additional local files if they exist.
 z4h source ~/.env.zsh
 # Enable COD binary
-z4h source <(cod init $$ zsh)
+if [[ -f "/usr/local/bin/cod" ]]; then
+    z4h source <(cod init $$ zsh)
+fi
 
 # Enable alias tips plug in
 # cloned via previous install command
@@ -171,8 +173,12 @@ alias vpn-status="/usr/bin/nordvpn status"
 alias vpn-account="/usr/bin/nordvpn account"
 alias vpn-help="/usr/bin/brave-browser https://support.nordvpn.com/Connectivity/Linux/1325531132/Installing-and-using-NordVPN-on-Debian-Ubuntu-and-Linux-Mint.htm"
 
+if [[ -f "/usr/bin/batcat" ]]; then
+    sudo apt install bat -y
+fi
 alias cat="batcat"
 alias bat="batcat"
+
 # Hide snap packages in df command
 alias df="df -x squashfs"
 
