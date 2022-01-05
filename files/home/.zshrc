@@ -46,7 +46,7 @@ zstyle ':z4h:ssh:*'                   enable 'yes'
 
 # Send these files over to the remote host when connecting over SSH to the
 # enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+zstyle ':z4h:ssh:*' send-extra-files '$HOME/.nanorc' '$HOME/.env.zsh'
 
 #####=== GIT Clone
 
@@ -67,7 +67,7 @@ z4h init || return
 #####=== Extend PATH.
 
 # Personal bin
-path=(~/bin $path)
+path=($HOME/bin $path)
 # Add PIP binaries
 PATH=$HOME/.local/bin:$PATH
 # Add cargo bin
@@ -107,7 +107,7 @@ export GOBIN=$HOME/go/bin
 export GO111MODULE=on
 
 #####=== Source additional local files if they exist.
-z4h source ~/.env.zsh
+z4h source $HOME/.env.zsh
 # Enable COD binary
 if [[ -f "/usr/local/bin/cod" ]]; then
     z4h source <(cod init $$ zsh)
@@ -137,8 +137,8 @@ z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 #####=== Autoload functions.
-if [[ -d "~/.config/zsh" ]]; then
-    fpath=( ~/.config/zsh "${fpath[@]}" )
+if [[ -d "$HOME/.config/zsh" ]]; then
+    fpath=( $HOME/.config/zsh "${fpath[@]}" )
     autoload -Uz $fpath[1]/*(.:t)
 fi
 
@@ -147,7 +147,7 @@ fi
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
-#####=== Define named directories: ~w <=> Windows home directory on WSL.
+#####=== Define named directories: $HOMEw <=> Windows home directory on WSL.
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
 
 #####=== Define aliases.
@@ -157,7 +157,7 @@ alias pcp='rsync -aP'
 
 alias er='code-insiders -r'
 alias e='code-insiders'
-alias e-root='code-insiders --user-data-dir="~/.vscode-insiders/"'
+alias e-root='code-insiders --user-data-dir="$HOME/.vscode-insiders/"'
 
 alias opermissions="stat -c '%A %a %n'"
 alias octperm="stat -c '%A %a %n'"
@@ -198,10 +198,10 @@ if [ -d "$HOME/.bookmarks" ]; then
     alias gt="cd -P"
 fi
 
-alias vi="~/Applications/nvim.appimage"
-alias vim="~/Applications/nvim.appimage"
-alias nvim="~/Applications/nvim.appimage"
-alias neovim="~/Applications/nvim.appimage"
+alias vi="$HOME/Applications/nvim.appimage"
+alias vim="$HOME/Applications/nvim.appimage"
+alias nvim="$HOME/Applications/nvim.appimage"
+alias neovim="$HOME/Applications/nvim.appimage"
 
 # Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
