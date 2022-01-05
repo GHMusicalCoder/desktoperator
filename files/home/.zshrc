@@ -46,7 +46,7 @@ zstyle ':z4h:ssh:*'                   enable 'yes'
 
 # Send these files over to the remote host when connecting over SSH to the
 # enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '$HOME/.nanorc' '$HOME/.env.zsh'
+zstyle ':z4h:ssh:*' send-extra-files '$HOME/.nanorc' '$HOME/.env.zsh' '$HOME/.config/zsh'
 
 #####=== GIT Clone
 
@@ -137,10 +137,9 @@ z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 #####=== Autoload functions.
-if [[ -d "$HOME/.config/zsh" ]]; then
-    fpath=( $HOME/.config/zsh "${fpath[@]}" )
-    autoload -Uz $fpath[1]/*(.:t)
-fi
+fpath=( $HOME/.config/zsh "${fpath[@]}" )
+autoload -Uz $fpath[1]/*(.:t)
+
 
 #####=== Define functions and completions.
 
