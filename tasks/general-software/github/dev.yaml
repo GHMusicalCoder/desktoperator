@@ -50,3 +50,21 @@
     src: "https://github.com/jesseduffield/lazydocker/releases/download/{{ lazydocker_release.tag }}/lazydocker_{{ lazydocker_version }}_Linux_x86_64.tar.gz"
     dest: /usr/local/bin
     remote_src: yes
+
+- name: get latest release version of k3sup from github
+  github_release:
+    user: alexellis
+    repo: k3sup
+    action: latest_release
+  register: k3sup_release
+
+- name: clean up k3sup version number
+  set_fact:
+    k3sup_version: "{{ k3sup_release.tag | regex_replace('^v', '') }}"
+
+- name: Download and install k3sup from github
+  become: yes
+  get_url:
+    url: https://github.com/alexellis/k3sup/releases/download/{{ k3sup_version }}/k3sup
+    dest: /usr/local/bin/k3sup
+    mode: "0755"
