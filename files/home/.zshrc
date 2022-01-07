@@ -188,6 +188,7 @@ alias k="kubectl"
 alias d="docker"
 alias g="git"
 alias dc="docker-compose"
+alias lzd="lazydocker"
 
 alias top="gotop"
 alias htop="gotop"

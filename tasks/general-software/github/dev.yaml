@@ -9,7 +9,7 @@
   set_fact:
     terraform_version: "{{ terraform_release.tag | regex_replace('^v', '') }}"
 
-- name: download & extract terraform tgz
+- name: download & extract terraform zip
   become: yes
   unarchive:
     src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
@@ -32,3 +32,21 @@
   become: yes
   apt:
     deb: https://github.com/cli/cli/releases/download/{{ gh_cli_release.tag }}/gh_{{ gh_cli_version }}_linux_amd64.deb
+
+- name: get latest release version of lazydocker from github
+  github_release:
+    user: jesseduffield
+    repo: lazydocker
+    action: latest_release
+  register: lazydocker_release
+
+- name: clean up lazydocker version number
+  set_fact:
+    lazydocker_version: "{{ lazydocker_release.tag | regex_replace('^v', '') }}"
+
+- name: download & extract lazydocker tgz
+  become: yes
+  unarchive:
+    src: "https://github.com/jesseduffield/lazydocker/releases/download/{{ lazydocker_release.tag }}/lazydocker_{{ lazydocker_version }}_Linux_x86_64.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
