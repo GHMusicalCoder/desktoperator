@@ -11,5 +11,12 @@ function do-update() {
     echoSection "Adding Missing Deps"
     sudo apt install -f -y
     sleep 1
+    if [ -d "$HOME/docker" ]; then
+        echoSection "Updating docker containers"
+        cd $HOME/docker
+        docker-compose pull && docker-compose down && docker-compose up -d
+    fi
+    sleep 1
     echoHeader "Completed System Update"
+
 }
