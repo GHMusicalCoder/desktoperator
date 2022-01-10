@@ -15,6 +15,7 @@ function do-update() {
         echoSection "Updating docker containers"
         cd $HOME/docker
         docker-compose pull && docker-compose down && docker-compose up -d
+        cd $HOME
     fi
     sleep 1
     echoHeader "Completed System Update"
