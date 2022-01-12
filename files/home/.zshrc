@@ -123,6 +123,11 @@ z4h source $Z4H/djui/alias-tips/alias-tips.plugin.zsh
 #z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
 #z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
 
+#####=== Eval additional commands
+
+# Enable zioxide (z functionality)
+eval "$(zoxide init zsh)"
+
 #####=== Define key bindings.
 
 z4h bindkey z4h-backward-kill-word  Ctrl+Backspace     Ctrl+H

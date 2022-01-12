@@ -55,6 +55,7 @@ apt_pkgs:
   - celluloid
   - exa
   - ripgrep
+  - zoxide
   # cargo dependency
   - libssl-dev
   # cargo dependency
