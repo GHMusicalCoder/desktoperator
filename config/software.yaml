@@ -53,6 +53,7 @@ apt_pkgs:
   - v4l-utils
   - nvme-cli
   - celluloid
+  - exa
   # cargo dependency
   - libssl-dev
   # cargo dependency

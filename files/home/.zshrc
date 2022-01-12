@@ -179,6 +179,7 @@ if [[ ! -f "/usr/bin/batcat" ]]; then
 fi
 alias cat="batcat"
 alias bat="batcat"
+alias ls="exa"
 
 # Hide snap packages in df command
 alias df="df -x squashfs"
@@ -204,7 +205,7 @@ alias nvim="$HOME/Applications/nvim.appimage"
 alias neovim="$HOME/Applications/nvim.appimage"
 
 # Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
+# alias ls="${aliases[ls]:-ls} -A"
 
 #####=== Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
