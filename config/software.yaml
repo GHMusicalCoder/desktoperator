@@ -54,6 +54,7 @@ apt_pkgs:
   - nvme-cli
   - celluloid
   - exa
+  - ripgrep
   # cargo dependency
   - libssl-dev
   # cargo dependency

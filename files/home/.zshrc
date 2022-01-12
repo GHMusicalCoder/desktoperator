@@ -180,6 +180,7 @@ fi
 alias cat="batcat"
 alias bat="batcat"
 alias ls="exa"
+alias grep="rg"
 
 # Hide snap packages in df command
 alias df="df -x squashfs"
