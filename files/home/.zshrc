@@ -70,8 +70,6 @@ z4h init || return
 path=($HOME/bin $path)
 # Add PIP binaries
 PATH=$HOME/.local/bin:$PATH
-# Add scrcpy bin
-PATH=/snap/scrcpy/current/usr/bin:$PATH
 # Add cargo bin
 PATH=$HOME/.cargo/bin:$PATH
 # Go
@@ -188,6 +186,9 @@ alias cat="batcat"
 alias bat="batcat"
 alias ls="exa"
 alias grep="rg"
+
+# Alias adb for scrcpy snap
+alias adb="scrcpy.adb"
 
 # Hide snap packages in df command
 alias df="df -x squashfs"
