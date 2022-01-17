@@ -70,6 +70,8 @@ z4h init || return
 path=($HOME/bin $path)
 # Add PIP binaries
 PATH=$HOME/.local/bin:$PATH
+# Add scrcpy bin
+PATH=/snap/scrcpy/current/usr/bin:$PATH
 # Add cargo bin
 PATH=$HOME/.cargo/bin:$PATH
 # Go
