@@ -1,0 +1,8 @@
+- name: placing scrcpy desktop file
+  become: yes
+  copy:
+    src: files/usr/share/applications/scrcpy.desktop
+    dest: "/usr/share/applications/scrcpy.desktop"
+    owner: "root"
+    group: "root"
+    mode: 0644

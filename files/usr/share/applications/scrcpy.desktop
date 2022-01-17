@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=scrcpy
+GenericName=Terminal emulator
+Comment=Connect to Android phone vis scrcpy
+TryExec=phone
+Exec=phone
+# Icon=/usr/local/kitty/share/icons/hicolor/256x256/apps/kitty.png
+Categories=System;TerminalEmulator;
