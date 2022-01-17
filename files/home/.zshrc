@@ -190,7 +190,7 @@ alias grep="rg"
 # Alias adb for scrcpy snap
 alias adb="scrcpy.adb"
 # launch scrcpy
-alias phone="nohup scrcpy --disable-screensaver --lock-video-orientation=0 -S --stay-awake --window-borderless &"
+alias phone="nohup scrcpy --lock-video-orientation=0 --stay-awake --window-borderless --rotation 0 --lock-video-orientation --turn-screen-off &"
 
 # Hide snap packages in df command
 alias df="df -x squashfs"
