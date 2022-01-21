@@ -2,3 +2,7 @@
   become: yes
   apt:
     deb: "https://github.com/federico-terzi/espanso/releases/download/v2.1.3-alpha/espanso-debian-x11-amd64.deb"
+- name: Check VERSION
+  shell: echo 'Remember to check for the latest version of Espanso.'
+  register: espansover
+- debug: msg="{{ espansover.stdout }}"
