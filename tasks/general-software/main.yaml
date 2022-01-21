@@ -46,6 +46,9 @@
 - name: import tasks/general-software/scrcpy.yaml
   include: tasks/general-software/scrcpy.yaml
   tags: scrcpy
+- name: import tasks/general-software/_tmp-espanso.yaml
+  include: tasks/general-software/_tmp-espanso.yaml
+  tags: espanso
 # - name: import tasks/general-software/cawbird.yaml
 #   include: tasks/general-software/cawbird.yaml
 #   tags: cawbird

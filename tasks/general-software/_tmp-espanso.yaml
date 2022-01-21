@@ -1,0 +1,4 @@
+- name: install espanso deb (tasks/general-software/tmp-espanso.yaml))
+  become: yes
+  apt:
+    deb: "https://github.com/federico-terzi/espanso/releases/download/v2.1.3-alpha/espanso-debian-x11-amd64.deb"
