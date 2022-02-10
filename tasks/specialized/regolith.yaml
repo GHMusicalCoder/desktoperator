@@ -26,3 +26,11 @@
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
     mode: 0644
+
+- name: placing Xresources-regolith
+  copy:
+    src: files/home/.Xresources-regolith
+    dest: "/home/{{ lookup('env','USER') }}/.Xresources-regolith"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: 0644
