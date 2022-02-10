@@ -1,3 +1,6 @@
 #include "/etc/regolith/styles/gruvbox/root"
 
 i3-wm.bar.font: pango:JetBrains Mono Medium 20, Material Design Icons 20
+
+gnome.terminal.font:    JetBrains Mono 18
+i3-wm.gaps.inner.size: 15
