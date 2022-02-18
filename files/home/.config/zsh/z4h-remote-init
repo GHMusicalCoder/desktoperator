@@ -1,0 +1,15 @@
+function z4h-remote-init() {
+    sudo apt install curl unzip bat fd-find -y
+    if test -d "/usr/bin/grep"; then
+        curl -sS https://webinstall.dev/zoxide | bash
+        EXA_VERSION=$(curl -s "https://api.github.com/repos/ogham/exa/releases/latest" | /usr/bin/grep -Po '"tag_name": "v\K[0-9.]+')
+    else
+        curl -sS https://webinstall.dev/zoxide | bash
+        EXA_VERSION=$(curl -s "https://api.github.com/repos/ogham/exa/releases/latest" | /bin/grep -Po '"tag_name": "v\K[0-9.]+')
+    fi
+    mkdir exa-tmp && cd exa-tmp
+    curl -Lo exa.zip "https://github.com/ogham/exa/releases/latest/download/exa-linux-x86_64-v${EXA_VERSION}.zip"
+    sudo unzip -q exa.zip bin/exa -d /usr/local
+    cd ..
+    rm -rf ./exa-tmp
+}

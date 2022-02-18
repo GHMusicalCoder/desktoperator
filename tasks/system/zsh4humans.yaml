@@ -145,6 +145,13 @@
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
 
+- name: placing zsh snap-font-fix function file
+  copy:
+    src: files/home/.config/zsh/z4h-remote-init
+    dest: "/home/{{ lookup('env','USER') }}/.config/zsh/z4h-remote-init"
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+
 - name: setup folders for shell bookmarks
   file:
     path: "/home/{{ lookup('env','USER') }}/.bookmarks"
