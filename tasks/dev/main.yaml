@@ -4,3 +4,6 @@
 - name: import tasks/dev/go.yaml
   include: tasks/dev/go.yaml
   tags: go
+- name: import tasks/dev/wails.yaml
+  include: tasks/dev/wails.yaml
+  tags: wails

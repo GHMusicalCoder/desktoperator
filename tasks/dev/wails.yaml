@@ -1,0 +1,15 @@
+---
+# - name: include vars from go.yaml
+#   include_vars: config/go.yaml
+- name: install wails dependencies
+  become: yes
+  ansible.builtin.apt:
+    pkg:
+      - libgtk-3-dev
+      - libwebkit2gtk-4.0-dev
+- name: install wails
+  shell: |
+    go install github.com/wailsapp/wails/v2/cmd/wails@latest
+    touch "/home/{{ lookup('env','USER') }}/.config/ansible-automation/go-get-wails"
+  args:
+    creates: "/home/{{ lookup('env','USER') }}/.config/ansible-automation/go-get-wails"
