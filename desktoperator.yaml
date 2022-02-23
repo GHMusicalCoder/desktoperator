@@ -12,6 +12,8 @@
       become: yes
       apt: update_cache=yes
       changed_when: false
+    - name: setup custom ansible modules
+      include: tasks/system/ansible-modules.yaml
   tasks:
     - include: tasks/main.yaml
     # - include: "{{ item }}"
