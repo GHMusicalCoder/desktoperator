@@ -70,7 +70,7 @@ apt_pkgs:
   - xournal
 
 remote_deb_path:
-  - https://dl3.xmind.net/XMind-for-Linux-amd-64bit-11.0.1-202106220606.deb
+  - https://dl3.xmind.net/XMind-for-Linux-amd-64bit-11.1.2-202111151820.deb
   - https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb
 
 # List of Apt packages to uninstall
