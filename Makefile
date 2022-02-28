@@ -47,6 +47,9 @@ install: ## install software dependencies
 run: ## run all ansible tasks
 	@echo "${BLUE}running all ansible tasks${RESET}"
 	@ansible-playbook --ask-become-pass --ask-vault-pass --connection=local "${PLAYBOOK}"
+testpb: ## run all ansible tasks in test PB
+	@echo "${BLUE}running all ansible tasks in test PB${RESET}"
+	@ansible-playbook --ask-become-pass --ask-vault-pass --connection=local testpb.yaml
 no_api: ## run all ansible tasks without making api calls
 	@echo "${BLUE}running all ansible tasks: ${YELLOW}without the github tag${RESET}"
 	@ansible-playbook --ask-become-pass --ask-vault-pass --connection=local --skip-tags "github" "${PLAYBOOK}"

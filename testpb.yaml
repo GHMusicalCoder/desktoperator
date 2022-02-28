@@ -1,0 +1,31 @@
+---
+- name: running test scrape
+  hosts: localhost
+  become: no
+  vars_files:
+    - config/software.yaml
+    - config/secrets.yaml
+    - config/release-pinning.yaml
+    - config/desktop.yaml
+  pre_tasks:
+    - name: setup custom ansible modules
+      include: tasks/system/ansible-modules.yaml
+  tasks:
+    - name: Get latest gotop version on GitHub
+      scrape:
+        url: https://github.com/xxxserxxx/gotop/releases/latest
+        xpath: '//*[@id="repo-content-pjax-container"]/nav/ol/li[2]/a'
+      register: gotop_url
+
+    - name: extract gotop version number
+      set_fact:
+        gotop_version: "{{ gotop_url | regex_search('(\\d(\\.\\d)+)') }}"
+
+    - name: Print return information from the previous task
+      ansible.builtin.debug:
+        var: gotop_version
+
+  post_tasks:
+# Generated regex here - https://regex-generator.olafneumann.org/
+# Tested Regex here - https://www.beautifyconverter.com/regex-tester.php
+#  Be sure to escape characters as needed in Ansible
