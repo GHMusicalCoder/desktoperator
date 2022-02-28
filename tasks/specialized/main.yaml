@@ -7,3 +7,6 @@
 - name: import tasks/specialized/mxkeys.yaml
   include: tasks/specialized/mxkeys.yaml
   tags: mxkeys
+- name: import tasks/specialized/scrape-test.yaml
+  include: tasks/specialized/scrape-test.yaml
+  tags: scrape

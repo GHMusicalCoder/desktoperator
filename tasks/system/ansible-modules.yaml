@@ -1,5 +1,9 @@
 # Scrape module from https://github.com/particledecay/ansible-scrape/blob/master/scrape.py
-
+- name: install beautifysoup pip packages
+  become: yes
+  pip:
+    name:
+      - beautifulsoup4
 - name: setup ansible module folders if they do not exist
   file:
     path: "{{ item }}"
@@ -8,10 +12,10 @@
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
   with_items:
-    - "/home/{{ lookup('env','USER') }}/.ansible/modules"
+    - "/home/{{ lookup('env','USER') }}/.ansible/plugins/modules"
 - name: placing scrape.py andible module
   copy:
     src: files/home/.ansible/modules/scrape.py
-    dest: "/home/{{ lookup('env','USER') }}/.ansible/modules/scrape.py"
+    dest: "/home/{{ lookup('env','USER') }}/.ansible/plugins/modules/scrape.py"
     owner: "{{ lookup('env','USER') }}"
     group: "{{ lookup('env','USER') }}"
